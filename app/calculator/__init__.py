@@ -16,6 +16,7 @@ SHORTCUT = {
     "div": "divide",
 }
 
+ERROR_MSG = "Invalid input. Please follow the format: <operation> <num1> <num2>"
 
 def calculator():
     print("Welcome to the Calculator REPL! Type 'help' for commands, 'exit' to quit.")
@@ -40,7 +41,7 @@ def calculator():
         cmd = SHORTCUT.get(cmd, cmd)
 
         if len(cmd_parts) != 3:
-            print("Invalid input. Format: <operation> <num1> <num2>")
+            print(ERROR_MSG)
             continue
 
         try:
@@ -48,7 +49,7 @@ def calculator():
             b = float(cmd_parts[2])
 
         except ValueError:
-            print("Invalid input. Please follow the format")
+            print(ERROR_MSG)
             continue
 
         try:

@@ -1,5 +1,7 @@
 from app.calculator import calculator
 
+ERROR_MSG = "Invalid input. Please follow the format: <operation> <num1> <num2>"
+
 
 def run_calculator_with_inputs(inputs, monkeypatch, capsys):
 
@@ -36,10 +38,17 @@ def test_divide_by_zero(monkeypatch, capsys):
 
 def test_invalid_input(monkeypatch, capsys):
     out = run_calculator_with_inputs(["add two three", "exit"], monkeypatch, capsys)
-    assert "Invalid input. Please follow the format" in out
+    assert ERROR_MSG in out
+
+
+def test_invalid_arg_count(monkeypatch, capsys):
+    #missing argument
+    out = run_calculator_with_inputs(["add 5", "exit"], monkeypatch, capsys)
+    assert ERROR_MSG in out
 
 
 def test_calculator_invalid_operation(monkeypatch, capsys):
+    #invalid operation
     out = run_calculator_with_inputs(["modulus 5 3", "exit"], monkeypatch, capsys)
     assert "Invalid operation. Type 'help' for a list of commands." in out
 
