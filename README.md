@@ -1,9 +1,11 @@
-# Module 2 Calculator Assignment
+# Module 3 Calculator Assignment
 
-This is a simple command-line calculator written in Python.  
+This is a command-line calculator written in Python that uses object-oriented programming principles, input validation, and error handling.
 It supports addition, subtraction, multiplication, and division using a REPL (Read–Eval–Print Loop) interface.
 
-The project includes automated unit tests using pytest and continuous integration using GitHub Actions.
+The project includes automated unit tests using pytest and continuous integration using GitHub Actions and builds upon Module 2 Calculator
+
+Module 3 Calculator refactors the logic to use a class-based design.
 
 ---
 
@@ -12,24 +14,28 @@ The project includes automated unit tests using pytest and continuous integratio
 - Add, subtract, multiply, divide  
 - REPL command-line interface  
 - Shortcut commands (add, sub, mul, div)  
+- Help command for user guidance
+- Input validation for incorrect formats and non-numeric values
 - Error handling (invalid input, divide by zero)  
-- Automated tests with pytest  
-- GitHub Actions CI  
+- Automated unit and integration tests with pytest  
+- Continuous integration with Github Actions to enforce 100% test coverage
 
 ---
 
-## Setup
+## Setup Instructions
 
-Create virtual environment:
+Clone the repository:
+
+```bash
+git clone https://github.com/brythecodeguy/Module-3-Assignment.git
+cd Module-3-Assignment
+```
+
+Create and activate a virtual environment, then install the required dependencies:
 
 ```bash
 python -m venv venv
 source venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
 pip install -r requirements.txt
 ```
 
@@ -53,4 +59,4 @@ pytest
 
 ## Continuous Integration
 
-Tests automatically run on every push using GitHub Actions.
+All tests must pass with full coverage. Tests automatically run on every push using GitHub Actions.
