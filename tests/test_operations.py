@@ -1,39 +1,61 @@
 import pytest
-from app.operations import add, subtract, multiply, divide
+from app.operations import Operations
 
 
-def test_add():
-    assert add(2.0, 3.0) == 5.0
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (2.0, 3.0, 5.0),
+        (-2.0, -3.0, -5.0),
+        (0.0, 0.0, 0.0),
+        (2.5, 3.5, 6.0),
+    ],
+    ids=["add_pos", "add_neg", "add_zeros", "add_floats"],
+)
+def test_add(a, b, expected):
+    assert Operations.add(a, b) == expected
 
 
-def test_add_negative():
-    assert add(-2.0, -3.0) == -5.0
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (5.0, 2.0, 3.0),
+        (2.0, 5.0, -3.0),
+        (-5.0, -2.0, -3.0),
+    ],
+    ids=["sub_pos", "sub_neg_result", "sub_neg_inputs"],
+)
+def test_subtract(a, b, expected):
+    assert Operations.subtract(a, b) == expected
 
 
-def test_subtract():
-    assert subtract(5.0, 2.0) == 3.0
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (4.0, 5.0, 20.0),
+        (-4.0, 5.0, -20.0),
+        (0.0, 99.0, 0.0),
+    ],
+    ids=["mul_pos", "mul_neg", "mul_zero"],
+)
+def test_multiply(a, b, expected):
+    assert Operations.multiply(a, b) == expected
 
 
-def test_subtract_negative():
-    assert subtract(2.0, 5.0) == -3.0
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
+        (10.0, 2.0, 5.0),
+        (-10.0, 2.0, -5.0),
+        (0.0, 5.0, 0.0),
+    ],
+    ids=["div_pos", "div_neg", "div_zero_num"],
+)
+def test_divide(a, b, expected):
+    assert Operations.divide(a, b) == expected
 
 
-def test_multiply():
-    assert multiply(4.0, 5.0) == 20.0
-
-
-def test_multiply_negative():
-    assert multiply(-4.0, 5.0) == -20.0
-
-
-def test_divide():
-    assert divide(10.0, 2.0) == 5.0
-
-
-def test_divide_negative():
-    assert divide(-10.0, 2.0) == -5.0
-
-
-def test_divide_by_zero_raises_value_error():
+@pytest.mark.parametrize("a", [1.0, -1.0, 0.0], ids=["pos", "neg", "zero"])
+def test_divide_by_zero_raises(a):
     with pytest.raises(ValueError):
-        divide(1.0, 0.0)
+        Operations.divide(a, 0.0)

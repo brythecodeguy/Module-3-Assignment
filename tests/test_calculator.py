@@ -8,40 +8,41 @@ def run_calculator_with_inputs(inputs, monkeypatch, capsys):
     calculator()
     return capsys.readouterr().out
 
-
-def test_calculator_add(monkeypatch, capsys):
+# positive test cases
+def test_add(monkeypatch, capsys):
     out = run_calculator_with_inputs(["add 2 3", "exit"], monkeypatch, capsys)
     assert "Result: 5.0" in out
 
 
-def test_calculator_subtract(monkeypatch, capsys):
+def test_subtract(monkeypatch, capsys):
     out = run_calculator_with_inputs(["subtract 9 4", "exit"], monkeypatch, capsys)
     assert "Result: 5.0" in out
 
 
-def test_calculator_multiply(monkeypatch, capsys):
+def test_multiply(monkeypatch, capsys):
     out = run_calculator_with_inputs(["multiply 4 5", "exit"], monkeypatch, capsys)
     assert "Result: 20.0" in out
 
 
-def test_calculator_divide(monkeypatch, capsys):
+def test_divide(monkeypatch, capsys):
     out = run_calculator_with_inputs(["divide 10 2", "exit"], monkeypatch, capsys)
     assert "Result: 5.0" in out
 
-
-def test_calculator_divide_by_zero_message(monkeypatch, capsys):
+# negative test cases 
+def test_divide_by_zero(monkeypatch, capsys):
     out = run_calculator_with_inputs(["divide 5 0", "exit"], monkeypatch, capsys)
     assert "Cannot divide by zero" in out
 
 
-def test_calculator_invalid_input(monkeypatch, capsys):
-    out = run_calculator_with_inputs(["add 2", "exit"], monkeypatch, capsys)
-    assert "Invalid input. Format:" in out
+def test_invalid_input(monkeypatch, capsys):
+    out = run_calculator_with_inputs(["add two three", "exit"], monkeypatch, capsys)
+    assert "Invalid input. Please follow the format" in out
 
 
 def test_calculator_invalid_operation(monkeypatch, capsys):
-    out = run_calculator_with_inputs(["power 2 3", "exit"], monkeypatch, capsys)
+    out = run_calculator_with_inputs(["modulus 5 3", "exit"], monkeypatch, capsys)
     assert "Invalid operation. Type 'help' for a list of commands." in out
+
 
 def test_calculator_blank_input(monkeypatch, capsys):
     #blank input is ignored

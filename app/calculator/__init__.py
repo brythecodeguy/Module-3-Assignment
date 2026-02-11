@@ -1,11 +1,11 @@
-from app.operations import add, subtract, multiply, divide
+from app.operations import Operations
 
 HELP_TEXT = (
     "Commands:\n"
     "  add a b        -> adds a + b\n"
     "  subtract a b   -> subtracts a - b (shortcut: sub)\n"
     "  multiply a b   -> multiplies a * b (shortcut: mul)\n"
-    "  divide a b     -> divides a / b (Shortcut: div)\n"
+    "  divide a b     -> divides a / b (shortcut: div)\n"
     "  help           -> show this message\n"
     "  exit           -> quit the program\n"
 )
@@ -15,6 +15,7 @@ SHORTCUT = {
     "mul": "multiply",
     "div": "divide",
 }
+
 
 def calculator():
     print("Welcome to the Calculator REPL! Type 'help' for commands, 'exit' to quit.")
@@ -26,7 +27,6 @@ def calculator():
             continue
 
         cmd_parts = user_input.split()
-
         cmd = cmd_parts[0].lower()
 
         if cmd == "help":
@@ -47,14 +47,19 @@ def calculator():
             a = float(cmd_parts[1])
             b = float(cmd_parts[2])
 
+        except ValueError:
+            print("Invalid input. Please follow the format")
+            continue
+
+        try:
             if cmd == "add":
-                print(f"Result: {add(a, b)}")
+                print(f"Result: {Operations.add(a, b)}")
             elif cmd == "subtract":
-                print(f"Result: {subtract(a, b)}")
+                print(f"Result: {Operations.subtract(a, b)}")
             elif cmd == "multiply":
-                print(f"Result: {multiply(a, b)}")
+                print(f"Result: {Operations.multiply(a, b)}")
             elif cmd == "divide":
-                print(f"Result: {divide(a, b)}")
+                print(f"Result: {Operations.divide(a, b)}")
             else:
                 print("Invalid operation. Type 'help' for a list of commands.")
 
